@@ -2,10 +2,16 @@ import { ReactNode } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import Header from "./Header";
 import ScrollTopButton from "./ScrollTopButton";
+import { darkTheme, whiteTheme } from "../styles/theme";
+import useDarkMode from "../hooks/useDarkMode";
+import GlobalStyle from "../styles/GlobalStyle";
 
 const Layout = ({ children }: { children: ReactNode }) => {
+  const { isCurrentDarkMode } = useDarkMode();
+  console.log(isCurrentDarkMode);
   return (
-    <ThemeProvider theme={{}}>
+    <ThemeProvider theme={isCurrentDarkMode ? darkTheme : whiteTheme}>
+      <GlobalStyle />
       <Container>
         <Header />
         <Wrapper>

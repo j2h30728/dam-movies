@@ -72,7 +72,7 @@ const ModalOverlay = styled.div`
 `;
 
 const Container = styled(motion.div)`
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.background};
   border-radius: 10px;
   max-width: 900px;
   width: calc(100vw - 15%);

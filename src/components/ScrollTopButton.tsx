@@ -7,7 +7,7 @@ import scrollTolTop from "../utils/scrollTolTop";
 const ScrollTopButton = ({ ...props }: ButtonHTMLAttributes<Element>) => {
   return (
     <Button {...props} onClick={scrollTolTop}>
-      <ChevronUpIcon color="white" width={30} height={30} />
+      <ChevronUpIcon width={30} height={30} />
     </Button>
   );
 };
@@ -18,7 +18,12 @@ const Button = styled.button`
   position: fixed;
   right: 30px;
   bottom: 3%;
-  background-color: gray;
+  background-color: ${({ theme }) => theme.color.text};
   padding: 8px 10px;
   border-radius: 100%;
+  border: 1 solid ${({ theme }) => theme.color.secondary};
+
+  svg {
+    color: ${({ theme }) => theme.color.point};
+  }
 `;

@@ -1,9 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { navigates } from "../constants/movie";
 import styled from "styled-components";
+import DarkModeButton from "./DarkModeButton";
+import useDarkMode from "../hooks/useDarkMode";
 
 const Header = () => {
   const { pathname } = useLocation();
+  const { isCurrentDarkMode, handleToggleDarkMode } = useDarkMode();
 
   return (
     <HeaderContainer>
@@ -19,6 +22,7 @@ const Header = () => {
           </Navigator>
         ))}
       </NavigatorContainer>
+      <DarkModeButton id="dark-mode" isDarkMode={isCurrentDarkMode} onClick={handleToggleDarkMode} />
     </HeaderContainer>
   );
 };
@@ -35,12 +39,16 @@ const HeaderContainer = styled.div`
   right: 0;
   width: 100vw;
   height: 70px;
-  background-color: #ffffff;
-  border-bottom: 1px solid gray;
+  background-color: ${({ theme }) => theme.color.background};
+  position: relative;
 
   #title {
     font-size: 20px;
     font-weight: 700;
+  }
+  #dark-mode {
+    position: absolute;
+    right: 3%;
   }
 `;
 
@@ -53,11 +61,11 @@ const Navigator = styled(Link)<{ $isCurrentPath: boolean }>`
   font-size: 20px;
   font-weight: 400;
   cursor: pointer;
-  color: ${(prop) => (prop.$isCurrentPath ? "red" : "black")};
+  color: ${({ theme, $isCurrentPath }) => ($isCurrentPath ? theme.color.primary : theme.color.text)};
   &:hover {
-    color: gray;
+    color: ${({ theme }) => theme.color.neutral};
   }
   &:active {
-    color: skyblue;
+    color: ${({ theme }) => theme.color.point};
   }
 `;

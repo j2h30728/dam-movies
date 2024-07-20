@@ -36,7 +36,7 @@ const SpinnerContainer = styled.div`
 const Dot = styled.div<SpinnerProps>`
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
-  border: ${({ size }) => (size ?? 50) / 10}px solid #f78d94;
+  border: ${({ size }) => (size ?? 50) / 10}px solid ${({ theme }) => theme.color.primary};
   border-top-color: transparent;
   border-radius: 50%;
   animation: ${spinAnimation} 1s infinite linear;
