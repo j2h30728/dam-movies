@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import { useParams } from "react-router-dom";
@@ -15,9 +15,15 @@ const MovieDetailInformation = () => {
   const { data: movieDetailData } = useMovieDetailQuery(movieId!);
   const navigateBack = useNavigateBack();
 
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
   return (
     <Container onClick={(e) => e.stopPropagation()} layoutId={`${movieListType}-${movieDetailData.id}`}>
-      <DetailBanner $src={makeImagePath(movieDetailData.backdrop_path, "original")} />
+      <DetailBannerImage
+        src={makeImagePath(movieDetailData.backdrop_path, "original")}
+        onLoad={() => setIsImageLoaded(true)}
+        $isImageLoaded={isImageLoaded}
+      />
       <XButton id="xButton" onClick={navigateBack} />
       <Wrapper>
         <h2 id="title">{movieDetailData.title}</h2>
@@ -81,7 +87,7 @@ const Container = styled(motion.div)`
   }
 `;
 
-const DetailBanner = styled.div<{ $src: string }>`
+const DetailBannerImage = styled.img<{ $isImageLoaded: boolean }>`
   width: 100%;
   height: 100%;
   max-height: 420px;
@@ -89,11 +95,13 @@ const DetailBanner = styled.div<{ $src: string }>`
   object-fit: cover;
   object-position: center center;
 
-  background-image: url(${(prop) => prop.$src});
   mask-image: linear-gradient(to bottom, #000000, #000000d3, transparent 100%);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  filter: ${(prop) => (prop.$isImageLoaded ? "" : "blur(20px)")};
+  opacity: ${(prop) => (prop.$isImageLoaded ? "1" : "0.5")};
 `;
 
 const Wrapper = styled.div`

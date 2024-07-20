@@ -16,7 +16,7 @@ export const getListFetcher = async ({
 
 export const getDetailFetcher = async ({ movieId }: { movieId: string }): Promise<DetailMovie> => {
   const { data } = await apiClient<DetailMovie>(`movie/${movieId}`);
-  await preloadImage(makeImagePath(data.backdrop_path, "original"));
+  preloadImage(makeImagePath(data.backdrop_path, "original"));
 
   return data;
 };
