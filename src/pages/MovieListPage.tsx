@@ -7,13 +7,15 @@ import { MovieListEndpoint } from "../constants/movie";
 import Spinner from "../components/Spinner";
 import { makeImagePath } from "../utils/makeImagePath";
 import useMovieListInfiniteQuery from "../hooks/queries/useMovieListInfiniteQuery";
+import setDefaultImageOnError from "../utils/setDefaultImageOnError";
 
 const MovieList = () => {
   const { movieListType } = useParams();
   const currentMovieListType = MovieListEndpoint(movieListType!) ?? "popular";
 
   const { data, targetItemRef, isFetchingNextPage } = useMovieListInfiniteQuery(currentMovieListType, {
-    language: "en",
+    language: "ko-KR",
+    region: "KR",
   });
 
   return (
@@ -32,7 +34,13 @@ const MovieList = () => {
               },
             }}
             variants={itemVariants}>
-            <img src={makeImagePath(movie.poster_path, "w300")} loading={index > 30 ? "lazy" : "eager"} />
+            <img
+              width={300}
+              height={450}
+              src={makeImagePath(movie.poster_path, "w300")}
+              loading={index > 30 ? "lazy" : "eager"}
+              onError={setDefaultImageOnError}
+            />
             <h4>{movie.title}</h4>
           </Movie>
         ))}
@@ -85,6 +93,7 @@ const Movie = styled(motion(Link))`
 
   img {
     border-radius: 10px;
+    background-color: ${({ theme }) => theme.color.secondary};
   }
 `;
 

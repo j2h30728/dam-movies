@@ -9,15 +9,21 @@ interface XButtonProps {
 const XButton = ({ size, ...props }: ButtonHTMLAttributes<Element> & XButtonProps) => {
   return (
     <Button size={size} {...props}>
-      <XMarkIcon color="rgba(0, 0, 0, 0.4)" />
+      <XMarkIcon />
     </Button>
   );
 };
 export default XButton;
 
 const Button = styled.button<XButtonProps>`
-  width: ${(props) => props.size ?? "30px"};
-  height: ${(props) => props.size ?? "30px"};
+  width: ${(props) => props.size ?? "35px"};
+  height: ${(props) => props.size ?? "35px"};
   border-radius: 100%;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: ${({ theme }) => theme.color.background};
+  opacity: 50%;
+
+  svg {
+    color: ${({ theme }) => theme.color.text};
+    opacity: 50%;
+  }
 `;

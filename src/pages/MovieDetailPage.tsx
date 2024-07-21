@@ -9,23 +9,31 @@ import { makeImagePath } from "../utils/makeImagePath";
 import Spinner from "../components/Spinner";
 import useNavigateBack from "../hooks/useNavigateBack";
 import useMovieDetailQuery from "../hooks/queries/useMovieDetailQuery";
+import useLockBodyScroll from "../hooks/useLockBodyScroll";
+import setDefaultImageOnError from "../utils/setDefaultImageOnError";
 
 const MovieDetailInformation = () => {
   const { movieId, movieListType } = useParams();
   const { data: movieDetailData } = useMovieDetailQuery(movieId!);
   const navigateBack = useNavigateBack();
+  useLockBodyScroll();
 
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-
   return (
     <Container onClick={(e) => e.stopPropagation()} layoutId={`${movieListType}-${movieDetailData.id}`}>
       <DetailBannerImage
-        src={makeImagePath(movieDetailData.backdrop_path, "original")}
+        src={makeImagePath(movieDetailData.backdrop_path, "w1280")}
         onLoad={() => setIsImageLoaded(true)}
+        onError={setDefaultImageOnError}
         $isImageLoaded={isImageLoaded}
       />
       <XButton id="xButton" onClick={navigateBack} />
       <Wrapper>
+        <div id="genres">
+          {movieDetailData.genres.map((genre) => (
+            <small key={genre.id}>{genre.name}</small>
+          ))}
+        </div>
         <h2 id="title">{movieDetailData.title}</h2>
         <span>{movieDetailData.overview}</span>
         <span>Budget: ${movieDetailData.budget.toLocaleString()}</span>
@@ -68,7 +76,7 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${({ theme }) => theme.color.backdrop};
 `;
 
 const Container = styled(motion.div)`
@@ -119,5 +127,15 @@ const Wrapper = styled.div`
   span {
     font-size: 20px;
     font-weight: 400;
+  }
+
+  #genres {
+    display: flex;
+    gap: 10px;
+    small {
+      padding: 2px 4px;
+      border-radius: 5px;
+      background-color: ${({ theme }) => theme.color.neutral};
+    }
   }
 `;

@@ -1,5 +1,5 @@
 import apiClient from ".";
-import { DetailMovie, MovieResponseData } from "../types/movie";
+import { DetailMovie, Genre, MovieResponseData } from "../types/movie";
 import { makeImagePath } from "../utils/makeImagePath";
 import preloadImage from "../utils/preloadImage";
 
@@ -15,8 +15,8 @@ export const getListFetcher = async ({
 };
 
 export const getDetailFetcher = async ({ movieId }: { movieId: string }): Promise<DetailMovie> => {
-  const { data } = await apiClient<DetailMovie>(`movie/${movieId}`);
-  preloadImage(makeImagePath(data.backdrop_path, "original"));
+  const { data } = await apiClient<DetailMovie>(`movie/${movieId}?language=ko-KR`);
+  preloadImage(makeImagePath(data.backdrop_path, "w1280"));
 
   return data;
 };

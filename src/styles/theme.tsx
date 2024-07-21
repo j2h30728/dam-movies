@@ -2,7 +2,8 @@ export type CustomTheme = typeof darkTheme;
 
 export const darkTheme = {
   color: {
-    background: "rgb(20, 20, 20)",
+    background: "#141518",
+    backdrop: "rgba(0, 0, 0, 0.7)",
     neutral: "#333333",
     point: "#FF4757",
     primary: "#1E90FF",
@@ -14,6 +15,7 @@ export const darkTheme = {
 export const whiteTheme: CustomTheme = {
   color: {
     background: "#FFFFFF",
+    backdrop: "rgba(0, 0, 0, 0.4)",
     neutral: "#F0F0F0",
     point: "#FF4757",
     primary: "#1E90FF",
