@@ -1,7 +1,7 @@
 import { Suspense, useState } from "react";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import XButton from "../components/XButton";
@@ -11,16 +11,19 @@ import useNavigateBack from "../hooks/useNavigateBack";
 import useMovieDetailQuery from "../hooks/queries/useMovieDetailQuery";
 import useLockBodyScroll from "../hooks/useLockBodyScroll";
 import setDefaultImageOnError from "../utils/setDefaultImageOnError";
+import { movieListEndpoint } from "../constants/movie";
 
 const MovieDetailInformation = () => {
-  const { movieId, movieListType } = useParams();
+  const { movieId } = useParams();
+  const { pathname } = useLocation();
   const { data: movieDetailData } = useMovieDetailQuery(movieId!);
   const navigateBack = useNavigateBack();
-  useLockBodyScroll();
-
+  const currentMovieListType = movieListEndpoint(pathname);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  console.log(currentMovieListType);
+  useLockBodyScroll();
   return (
-    <Container onClick={(e) => e.stopPropagation()} layoutId={`${movieListType}-${movieDetailData.id}`}>
+    <Container onClick={(e) => e.stopPropagation()} layoutId={`${currentMovieListType}-${movieDetailData.id}`}>
       <DetailBannerImage
         src={makeImagePath(movieDetailData.backdrop_path, "w1280")}
         onLoad={() => setIsImageLoaded(true)}

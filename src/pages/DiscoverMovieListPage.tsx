@@ -1,35 +1,33 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Suspense } from "react";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
 
-import { movieListEndpoint } from "../constants/movie";
+import useDiscoverMovieListInfiniteQuery from "../hooks/queries/useDiscoverMovieListInfiniteQuery";
 import Spinner from "../components/Spinner";
-import useMovieListInfiniteQuery from "../hooks/queries/useMovieListInfiniteQuery";
 import MovieList from "../components/movie/MovieList";
+import { MOVIE_LIST_TYPE } from "../constants/movie";
 
-const InfiniteMovieList = () => {
-  const { pathname } = useLocation();
-  const currentMovieListType = movieListEndpoint(pathname);
-  const { data, targetItemRef, isFetchingNextPage } = useMovieListInfiniteQuery(currentMovieListType, {
+const DiscoverMovieList = () => {
+  const { data, targetItemRef, isFetchingNextPage } = useDiscoverMovieListInfiniteQuery({
     language: "ko-KR",
     region: "KR",
   });
 
   return (
     <>
-      <MovieList listData={data} listType={currentMovieListType} />
+      <MovieList listData={data} listType={MOVIE_LIST_TYPE.DISCOVER} key={MOVIE_LIST_TYPE.DISCOVER} />
       <div ref={targetItemRef}>{isFetchingNextPage ? <Spinner size={50} /> : null}</div>
     </>
   );
 };
 
-const MovieListPage = () => {
+const DiscoverMovieListPage = () => {
   return (
     <AnimatePresence>
       <ListWrapper>
         <Suspense fallback={<Spinner />}>
-          <InfiniteMovieList />
+          <DiscoverMovieList />
         </Suspense>
         <Outlet />
       </ListWrapper>
@@ -37,7 +35,7 @@ const MovieListPage = () => {
   );
 };
 
-export default MovieListPage;
+export default DiscoverMovieListPage;
 
 const ListWrapper = styled.div`
   width: calc(100vw - 50px);

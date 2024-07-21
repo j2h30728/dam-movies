@@ -40,7 +40,6 @@ const HeaderContainer = styled.div`
   width: 100vw;
   height: 70px;
   background-color: ${({ theme }) => theme.color.background};
-  position: relative;
 
   #title {
     font-size: 20px;

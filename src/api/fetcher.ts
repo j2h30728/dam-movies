@@ -20,3 +20,8 @@ export const getDetailFetcher = async ({ movieId }: { movieId: string }): Promis
 
   return data;
 };
+
+export const getMovieGenre = async () => {
+  const { data } = await apiClient.get<{ genres: Genre[] }>(`genre/movie/list`);
+  return data;
+};
