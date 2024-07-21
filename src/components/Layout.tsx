@@ -8,7 +8,6 @@ import GlobalStyle from "../styles/GlobalStyle";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const { isCurrentDarkMode } = useDarkMode();
-  console.log(isCurrentDarkMode);
   return (
     <ThemeProvider theme={isCurrentDarkMode ? darkTheme : whiteTheme}>
       <GlobalStyle />
@@ -28,7 +27,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  margin-top: 100px;
+  margin-top: 70px;
   display: flex;
   justify-content: center;
   align-items: center;

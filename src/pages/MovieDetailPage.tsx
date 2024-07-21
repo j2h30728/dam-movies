@@ -20,7 +20,6 @@ const MovieDetailInformation = () => {
   const navigateBack = useNavigateBack();
   const currentMovieListType = movieListEndpoint(pathname);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  console.log(currentMovieListType);
   useLockBodyScroll();
   return (
     <Container onClick={(e) => e.stopPropagation()} layoutId={`${currentMovieListType}-${movieDetailData.id}`}>

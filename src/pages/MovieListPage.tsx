@@ -42,4 +42,5 @@ export default MovieListPage;
 const ListWrapper = styled.div`
   width: calc(100vw - 50px);
   height: 100vh;
+  margin-top: 50px;
 `;

@@ -1,15 +1,15 @@
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
+
 import { getListFetcher } from "../../api/fetcher";
 import useIntersectionObserver from "../useIntersectionObserver";
-import { buildQueryString } from "../../utils/queryString";
+import { Filters } from "../useFilters";
 
-const useDiscoverMovieListInfiniteQuery = (queryParams?: Record<string, string>) => {
-  const queryString = buildQueryString(queryParams || {});
-  const url = `discover/movie${queryString}`;
+const useDiscoverMovieListInfiniteQuery = (queryObject?: Partial<Filters>) => {
+  const url = `discover/movie`;
 
   const { data, fetchNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
-    queryKey: [{ scope: "movies", queryParams }],
-    queryFn: ({ pageParam }) => getListFetcher({ url, pageParam }),
+    queryKey: [{ scope: "movies", queryObject }],
+    queryFn: ({ pageParam }) => getListFetcher({ url, pageParam, queryObject }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => (lastPage.page <= lastPage.total_pages ? lastPage.page + 1 : undefined),
   });

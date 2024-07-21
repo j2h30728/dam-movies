@@ -21,7 +21,6 @@ export type MovieListType = (typeof MOVIE_LIST_TYPE)[keyof typeof MOVIE_LIST_TYP
 
 export const movieListEndpoint = (pathname: string) => {
   const movieListType = pathname.split("/")[1];
-  console.log(movieListType);
   switch (movieListType) {
     case "coming-soon":
       return MOVIE_LIST_TYPE.UPCOMING;

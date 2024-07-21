@@ -8,7 +8,6 @@ import { Movie } from "../../types/movie";
 import { MovieListType } from "../../constants/movie";
 
 const MovieList = ({ listData, listType }: { listData: Movie[]; listType: MovieListType }) => {
-  console.log(`${listType}-test`);
   return (
     <MoviesWrapper initial="hidden" animate="visible" key={listType} variants={containerVariants}>
       {listData.map((movie, index) => (

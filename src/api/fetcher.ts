@@ -1,16 +1,21 @@
 import apiClient from ".";
+import { Filters } from "../hooks/useFilters";
 import { DetailMovie, Genre, MovieResponseData } from "../types/movie";
 import { makeImagePath } from "../utils/makeImagePath";
 import preloadImage from "../utils/preloadImage";
+import { updateQueryString } from "../utils/queryString";
 
 export const getListFetcher = async ({
   url,
   pageParam,
+  queryObject,
 }: {
   url: string;
   pageParam: number;
+  queryObject?: Partial<Filters>;
 }): Promise<MovieResponseData> => {
-  const result = await apiClient.get<MovieResponseData>(`${url}&page=${pageParam}`);
+  const queryString = updateQueryString({ ...queryObject, page: pageParam });
+  const result = await apiClient.get<MovieResponseData>(`${url}${queryString}`);
   return result.data;
 };
 
@@ -21,7 +26,7 @@ export const getDetailFetcher = async ({ movieId }: { movieId: string }): Promis
   return data;
 };
 
-export const getMovieGenre = async () => {
-  const { data } = await apiClient.get<{ genres: Genre[] }>(`genre/movie/list`);
+export const getGenres = async (type: "movie") => {
+  const { data } = await apiClient.get<{ genres: Genre[] }>(`genre/${type}/list`);
   return data;
 };
