@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Suspense } from "react";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
@@ -9,15 +9,19 @@ import MovieList from "../components/movie/MovieList";
 import { MOVIE_LIST_TYPE } from "../constants/movie";
 import Genres from "../components/movie/Genres";
 import useFilters from "../hooks/useFilters";
+import Languages from "../components/movie/Languages";
 
 const DiscoverMovieList = () => {
-  const { currentFilters } = useFilters();
+  const { currentFilters, currentFiltersQueryString } = useFilters();
   const { data, targetItemRef, isFetchingNextPage } = useDiscoverMovieListInfiniteQuery(currentFilters);
-  const location = useLocation();
-  location.search;
+
   return (
     <ListWrapper>
-      <MovieList listData={data} listType={MOVIE_LIST_TYPE.DISCOVER} key={MOVIE_LIST_TYPE.DISCOVER} />
+      <MovieList
+        listData={data}
+        listType={MOVIE_LIST_TYPE.DISCOVER + currentFiltersQueryString}
+        key={MOVIE_LIST_TYPE.DISCOVER}
+      />
       <div ref={targetItemRef}>{isFetchingNextPage ? <Spinner size={50} /> : null}</div>
     </ListWrapper>
   );
@@ -28,6 +32,7 @@ const DiscoverMovieListPage = () => {
     <AnimatePresence>
       <ListContainer>
         <Suspense>
+          <Languages />
           <Genres />
         </Suspense>
         <Suspense fallback={<Spinner />}>

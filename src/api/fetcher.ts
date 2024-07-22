@@ -1,6 +1,6 @@
 import apiClient from ".";
 import { Filters } from "../hooks/useFilters";
-import { DetailMovie, Genre, MovieResponseData } from "../types/movie";
+import { DetailMovie, Genre, MovieResponseData, SpokenLanguage } from "../types/movie";
 import { makeImagePath } from "../utils/makeImagePath";
 import preloadImage from "../utils/preloadImage";
 import { updateQueryString } from "../utils/queryString";
@@ -28,5 +28,10 @@ export const getDetailFetcher = async ({ movieId }: { movieId: string }): Promis
 
 export const getGenres = async (type: "movie") => {
   const { data } = await apiClient.get<{ genres: Genre[] }>(`genre/${type}/list`);
+  return data;
+};
+
+export const getLanguages = async () => {
+  const { data } = await apiClient.get<SpokenLanguage[]>(`configuration/languages`);
   return data;
 };
