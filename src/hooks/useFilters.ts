@@ -13,8 +13,14 @@ export interface Filters {
   with_genres?: number[];
   sort_by?: string;
   primary_release_year?: number;
+  language?: string;
+  region?: string;
   [key: string]: unknown;
 }
+const initialFilters: Filters = {
+  language: "ko",
+  region: "KR",
+};
 
 const useFilters = () => {
   const { search } = useLocation();
@@ -22,7 +28,8 @@ const useFilters = () => {
 
   const currentFilters: Filters = pipe(
     (s: string) => parseQueryString(s),
-    (q: Record<string, string>) => unFlattenObject(q, ["with_genres"])
+    (q: Record<string, string>) => unFlattenObject(q, ["with_genres"]),
+    (q: Filters) => ({ ...initialFilters, ...q })
   )(search);
   const currentFiltersQueryString = search;
 
