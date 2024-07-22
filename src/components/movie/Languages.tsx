@@ -6,7 +6,6 @@ import useLanguages from "../../hooks/queries/useLanguages";
 const Languages = () => {
   const { data } = useLanguages();
   const { toggleFilters, currentFilters } = useFilters();
-  console.log(currentFilters.language);
   return (
     <SelectWrapper
       name="languages"

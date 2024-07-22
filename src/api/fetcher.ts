@@ -19,8 +19,15 @@ export const getListFetcher = async ({
   return result.data;
 };
 
-export const getDetailFetcher = async ({ movieId }: { movieId: string }): Promise<DetailMovie> => {
-  const { data } = await apiClient<DetailMovie>(`movie/${movieId}?language=ko-KR`);
+export const getDetailFetcher = async ({
+  movieId,
+  languageQueryObject,
+}: {
+  movieId: string;
+  languageQueryObject?: Partial<Filters>;
+}): Promise<DetailMovie> => {
+  const queryString = updateQueryString({ ...languageQueryObject });
+  const { data } = await apiClient<DetailMovie>(`movie/${movieId}${queryString ?? `?language=ko-KR`}`);
   preloadImage(makeImagePath(data.backdrop_path, "w1280"));
 
   return data;

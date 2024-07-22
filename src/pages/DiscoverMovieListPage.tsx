@@ -12,16 +12,12 @@ import useFilters from "../hooks/useFilters";
 import Languages from "../components/movie/Languages";
 
 const DiscoverMovieList = () => {
-  const { currentFilters, currentFiltersQueryString } = useFilters();
+  const { currentFilters } = useFilters();
   const { data, targetItemRef, isFetchingNextPage } = useDiscoverMovieListInfiniteQuery(currentFilters);
 
   return (
     <ListWrapper>
-      <MovieList
-        listData={data}
-        listType={MOVIE_LIST_TYPE.DISCOVER + currentFiltersQueryString}
-        key={MOVIE_LIST_TYPE.DISCOVER}
-      />
+      <MovieList listData={data} listType={MOVIE_LIST_TYPE.DISCOVER} key={MOVIE_LIST_TYPE.DISCOVER} />
       <div ref={targetItemRef}>{isFetchingNextPage ? <Spinner size={50} /> : null}</div>
     </ListWrapper>
   );

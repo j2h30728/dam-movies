@@ -12,15 +12,19 @@ import useMovieDetailQuery from "../hooks/queries/useMovieDetailQuery";
 import useLockBodyScroll from "../hooks/useLockBodyScroll";
 import setDefaultImageOnError from "../utils/setDefaultImageOnError";
 import { movieListEndpoint } from "../constants/movie";
+import useFilters from "../hooks/useFilters";
 
 const MovieDetailInformation = () => {
   const { movieId } = useParams();
   const { pathname } = useLocation();
-  const { data: movieDetailData } = useMovieDetailQuery(movieId!);
   const navigateBack = useNavigateBack();
+  const { currentFilters } = useFilters();
+  const LanguageQuery = { language: currentFilters.language };
+  const { data: movieDetailData } = useMovieDetailQuery(movieId!, LanguageQuery);
   const currentMovieListType = movieListEndpoint(pathname);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   useLockBodyScroll();
+
   return (
     <Container onClick={(e) => e.stopPropagation()} layoutId={`${currentMovieListType}-${movieDetailData.id}`}>
       <DetailBannerImage

@@ -10,7 +10,7 @@ import { MovieListType } from "../../constants/movie";
 const MovieList = ({ listData, listType }: { listData: Movie[]; listType: MovieListType | string }) => {
   const { search } = useLocation();
   return (
-    <MoviesWrapper initial="hidden" animate="visible" key={listType} variants={containerVariants}>
+    <MoviesWrapper initial="hidden" animate="visible" key={listType + search} variants={containerVariants}>
       {listData.map((movie, index) => (
         <MovieItem
           key={`${listType}-${movie.id}-${index}`}
