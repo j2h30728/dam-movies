@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { makeImagePath } from "../../utils/makeImagePath";
 import setDefaultImageOnError from "../../utils/setDefaultImageOnError";
@@ -7,13 +7,14 @@ import setDefaultImageOnError from "../../utils/setDefaultImageOnError";
 import { Movie } from "../../types/movie";
 import { MovieListType } from "../../constants/movie";
 
-const MovieList = ({ listData, listType }: { listData: Movie[]; listType: MovieListType }) => {
+const MovieList = ({ listData, listType }: { listData: Movie[]; listType: MovieListType | string }) => {
+  const { search } = useLocation();
   return (
     <MoviesWrapper initial="hidden" animate="visible" key={listType} variants={containerVariants}>
       {listData.map((movie, index) => (
         <MovieItem
           key={`${listType}-${movie.id}-${index}`}
-          to={`movie/${movie.id}`}
+          to={`movie/${movie.id}${search}`}
           layoutId={`${listType}-${movie.id}`}
           whileHover={{
             scale: 1.1,
