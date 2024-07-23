@@ -1,6 +1,6 @@
 import apiClient from ".";
 import { Filters } from "../hooks/useFilters";
-import { DetailMovie, Genre, MovieResponseData, SpokenLanguage } from "../types/movie";
+import { Country, DetailMovie, Genre, MovieResponseData, SpokenLanguage } from "../types/movie";
 import { makeImagePath } from "../utils/makeImagePath";
 import preloadImage from "../utils/preloadImage";
 import { updateQueryString } from "../utils/queryString";
@@ -43,5 +43,10 @@ export const getGenres = async (type: "movie") => {
 
 export const getLanguages = async () => {
   const { data } = await apiClient.get<SpokenLanguage[]>(`configuration/languages`);
+  return data;
+};
+
+export const getCountries = async () => {
+  const { data } = await apiClient.get<Country[]>(`configuration/countries`);
   return data;
 };

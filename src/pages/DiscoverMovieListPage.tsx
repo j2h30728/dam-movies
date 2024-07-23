@@ -7,9 +7,8 @@ import useDiscoverMovieListInfiniteQuery from "../hooks/queries/useDiscoverMovie
 import Spinner from "../components/Spinner";
 import MovieList from "../components/movie/MovieList";
 import { MOVIE_LIST_TYPE } from "../constants/movie";
-import Genres from "../components/movie/Genres";
 import useFilters from "../hooks/useFilters";
-import Languages from "../components/movie/Languages";
+import Filter from "../components/filter/Filter";
 
 const DiscoverMovieList = () => {
   const { currentFilters } = useFilters();
@@ -28,8 +27,7 @@ const DiscoverMovieListPage = () => {
     <AnimatePresence>
       <ListContainer>
         <Suspense>
-          <Languages />
-          <Genres />
+          <Filter />
         </Suspense>
         <Suspense fallback={<Spinner />}>
           <DiscoverMovieList />
