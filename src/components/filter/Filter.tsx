@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import Countries from "../movie/Countries";
 import Genres from "../movie/Genres";
 import Languages from "../movie/Languages";
@@ -32,7 +33,7 @@ export default Filter;
 const FilterWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 10px;
 `;
 
 const FilterItem = styled.div`
@@ -40,5 +41,6 @@ const FilterItem = styled.div`
   align-items: center;
 `;
 const Title = styled.div`
-  width: 100px;
+  width: 60px;
+  font-weight: 600;
 `;
