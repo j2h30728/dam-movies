@@ -15,7 +15,6 @@ export interface Filters {
   primary_release_year?: number;
   language?: string;
   region?: string;
-  [key: string]: unknown;
 }
 const initialFilters: Filters = {
   language: window.navigator.language.split("-")[0],
@@ -38,7 +37,7 @@ const useFilters = () => {
     navigate({ search: updateQueryString(updatedFilters) });
   };
 
-  const toggleFilters = <T extends keyof Filters>(key: T, value: Filters[T] extends (infer U)[] ? U : Filters[T]) => {
+  const toggleFilters = <T extends keyof Filters>(key: T, value: Filters[T]) => {
     const updatedFilters = { ...currentFilters };
 
     if (Array.isArray(updatedFilters[key]) && Array.isArray(value)) {
