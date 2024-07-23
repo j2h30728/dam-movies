@@ -19,6 +19,7 @@ export interface Filters {
 const initialFilters: Filters = {
   language: window.navigator.language.split("-")[0],
   region: navigator.language.split("-")[1],
+  sort_by: "popularity.desc",
 };
 
 const useFilters = () => {
