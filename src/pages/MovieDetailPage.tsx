@@ -28,7 +28,7 @@ const MovieDetailInformation = () => {
   return (
     <Container onClick={(e) => e.stopPropagation()} layoutId={`${currentMovieListType}-${movieDetailData.id}`}>
       <DetailBannerImage
-        src={makeImagePath(movieDetailData.backdrop_path, "w1280")}
+        src={makeImagePath(movieDetailData.backdrop_path, "w1280", movieDetailData.original_language)}
         onLoad={() => setIsImageLoaded(true)}
         onError={setDefaultImageOnError}
         $isImageLoaded={isImageLoaded}

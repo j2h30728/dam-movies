@@ -31,7 +31,9 @@ export const getDetailFetcher = async ({
 }): Promise<DetailMovie> => {
   const queryString = updateQueryString({ ...languageQueryObject });
   const { data } = await apiClient<DetailMovie>(`movie/${movieId}${queryString ?? `?language=ko-KR`}`);
-  preloadImage(makeImagePath(data.backdrop_path, "w1280"));
+  preloadImage(
+    makeImagePath(data.backdrop_path, "w1280", languageQueryObject?.language ?? window.navigator.language.split("-")[0])
+  );
 
   return data;
 };

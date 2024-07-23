@@ -27,7 +27,7 @@ const MovieList = ({ listData, listType }: { listData: Movie[]; listType: MovieL
           <img
             width={300}
             height={450}
-            src={makeImagePath(movie.poster_path, "w300")}
+            src={makeImagePath(movie.poster_path, "w300", movie.original_language)}
             loading={index > 30 ? "lazy" : "eager"}
             onError={setDefaultImageOnError}
           />
