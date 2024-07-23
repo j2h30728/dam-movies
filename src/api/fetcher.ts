@@ -14,7 +14,10 @@ export const getListFetcher = async ({
   pageParam: number;
   queryObject?: Partial<Filters>;
 }): Promise<MovieResponseData> => {
-  const queryString = updateQueryString({ ...queryObject, page: pageParam });
+  const queryString = updateQueryString({
+    ...queryObject,
+    page: pageParam,
+  });
   const result = await apiClient.get<MovieResponseData>(`${url}${queryString}`);
   return result.data;
 };

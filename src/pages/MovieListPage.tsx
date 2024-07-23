@@ -11,10 +11,7 @@ import MovieList from "../components/movie/MovieList";
 const InfiniteMovieList = () => {
   const { pathname } = useLocation();
   const currentMovieListType = movieListEndpoint(pathname);
-  const { data, targetItemRef, isFetchingNextPage } = useMovieListInfiniteQuery(currentMovieListType, {
-    language: "ko-KR",
-    region: "KR",
-  });
+  const { data, targetItemRef, isFetchingNextPage } = useMovieListInfiniteQuery(currentMovieListType);
 
   return (
     <>

@@ -18,8 +18,8 @@ export interface Filters {
   [key: string]: unknown;
 }
 const initialFilters: Filters = {
-  language: "ko",
-  region: "KR",
+  language: window.navigator.language.split("-")[0],
+  region: navigator.language.split("-")[1],
 };
 
 const useFilters = () => {

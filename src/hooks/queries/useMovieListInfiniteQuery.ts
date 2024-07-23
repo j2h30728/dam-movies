@@ -3,10 +3,10 @@ import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { getListFetcher } from "../../api/fetcher";
 import useIntersectionObserver from "../useIntersectionObserver";
 import { MovieListType } from "../../constants/movie";
-import { Filters } from "../useFilters";
 
-const useMovieListInfiniteQuery = (movieListType: MovieListType, queryObject?: Partial<Filters>) => {
+const useMovieListInfiniteQuery = (movieListType: MovieListType) => {
   const url = `movie/${movieListType}`;
+  const queryObject = { language: navigator.language, region: navigator.language.split("-")[1] };
 
   const { data, fetchNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
     queryKey: [{ scope: "movies", movieListType, queryObject }],
