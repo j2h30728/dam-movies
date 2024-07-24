@@ -1,19 +1,19 @@
-## 기술스택
-
-- React (vite)
-- TypeScript
-- Styled-components
-- tanstack-query
-- framer-motion
-
 ## 프로젝트 상세 구현 내용
 
 ### query parameter를 사용한 영화리스트 필터 구현 (추가 구현 중)
 
+![filter](./docs/filter.png)
+
 - 중첩객체를 변환 시키지 못하는 URLSearchParams를 위하여 queryString 관련 유틸리티함수 생성
   - 현재 중첩객체 필터 미적용(추후, 날짜 및 평점으로 적용 예정)
 - `window.navigator.language` (사용자 선호언어)를 기반으로 필터의 language와 region의 초기값으로 설정
+
   - 필터가 적용되지않는 영화 리스트일 경우 사용자 선호언어 기반으로 렌더링
+
+- 필터예시
+  |sorted_by (인기도 높은순) <br/> region (일본) <br/> language (한국어) <br/> genre (Adventure, Animation)|sorted_by (인기도 높은순) <br/> region (일본) <br/> language (일본어) <br/> genre (Adventure, Animation)|
+  |-|-|
+  |<img src='./docs/filter-1.png' src='필터예시1' />|<img src='./docs/filter-2.png' src='필터예시2' />|
 
 ### 이미지 최적화
 
@@ -30,6 +30,14 @@
 ### 영화리스트 무한스크롤 구현
 
 - intersection observer API 와 tanstack-query의 useSuspenseInfiniteQuery 결합하여 구현
+
+## 기술스택
+
+- React (vite)
+- TypeScript
+- Styled-components
+- tanstack-query
+- framer-motion
 
 ## 배포
 
