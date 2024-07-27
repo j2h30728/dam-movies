@@ -35,6 +35,7 @@ const ChipItem = styled.button<{ $isSelected: boolean }>`
   padding: 10px 8px;
   border-radius: 50px;
   background-color: ${({ theme, $isSelected }) => ($isSelected ? theme.color.point : theme.color.neutral)};
+  color: ${({ theme, $isSelected }) => ($isSelected ? theme.color.background : theme.color.text)};
   cursor: pointer;
 
   white-space: nowrap;

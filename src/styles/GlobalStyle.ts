@@ -1,8 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-
-
 html,
 body,
 div,
@@ -29,6 +27,7 @@ p {
     &::-webkit-scrollbar {
       display: none; /* Chrome, Safari, Opera */
     }
+    font-family: 'Pretendard-Regular', sans-serif;
   }
 button {
     background: inherit;

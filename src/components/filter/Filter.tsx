@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-import Countries from "../movie/Countries";
-import Genres from "../movie/Genres";
-import Languages from "../movie/Languages";
-import SortType from "../movie/SortType";
+import Countries from "./Countries";
+import Genres from "./Genres";
+import Languages from "./Languages";
+import SortType from "./SortType";
 
 const Filter = () => {
   return (
